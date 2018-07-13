@@ -60,6 +60,7 @@ class UserManager(UserManager__Settings, UserManager__Utils, UserManager__Views)
         UserInvitationClass=None,
         UserEmailClass=None,
         RoleClass=None,    # Only used for testing
+        EmailAdapterClass=None
         ):
 
         # See http://flask.pocoo.org/docs/0.12/extensiondev/#the-extension-code
@@ -186,8 +187,11 @@ class UserManager(UserManager__Settings, UserManager__Utils, UserManager__Views)
 
         # Set default EmailAdapter
         if self.USER_ENABLE_EMAIL:
-            from .email_adapters.smtp_email_adapter import SMTPEmailAdapter
-            self.email_adapter = SMTPEmailAdapter(app)
+            if EmailAdapterClass is not None:
+                self.email_adapter = EmailAdapterClass(app)
+            else:
+                from .email_adapters.smtp_email_adapter import SMTPEmailAdapter
+                self.email_adapter = SMTPEmailAdapter(app)
 
         # Setup EmailManager
         if self.USER_ENABLE_EMAIL:

@@ -79,10 +79,12 @@ setup(
         'cryptography>=1.6',
         'Flask>=0.9',
         'Flask-Login>=0.2',
-        'Flask-Mail>=0.9',
         'Flask-SQLAlchemy>=1.0',
         'Flask-WTF>=0.9',
         'passlib>=1.6',
     ],
     tests_require=['pytest'],
+    extra_require={
+        'Flask-Mail': ['Flask-Mail>=0.9']
+    }
 )
