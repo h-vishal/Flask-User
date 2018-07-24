@@ -50,7 +50,7 @@ class UserManager(UserManager__Settings, UserManager__Utils, UserManager__Views)
             Customizable UserManager methods
         """
 
-        #see http://flask.pocoo.org/docs/0.12/extensiondev/#the-extension-code """
+        # see http://flask.pocoo.org/docs/0.12/extensiondev/#the-extension-code
         self.app = app
         if app:
             self.init_app(app, db, UserClass, **kwargs)
@@ -196,6 +196,9 @@ class UserManager(UserManager__Settings, UserManager__Utils, UserManager__Views)
         # Setup EmailManager
         if self.USER_ENABLE_EMAIL:
             self.email_manager = EmailManager(app)
+
+        if self.USER_ENABLE_INVITE_USER:
+            self.UserInvitationClass = UserInvitationClass
 
         # Setup TokenManager
         self.token_manager = TokenManager(app)
